@@ -10,19 +10,19 @@ export default class UserModel{
     #cpf;
 
     constructor(name, age, birthData, cpf, email, password){
-        this.name = name;
-        this.age = age;
-        this.birthData = birthData;
-        this.cpf = cpf;
-        this.email = email;
-        this.password = password;
+        this.setName = name;
+        this.setAge = age;
+        this.setBirthData = birthData;
+        this.setCpf = cpf;
+        this.setEmail = email;
+        this.setPassword = password;
     }
 
-    get name(){
+    get getName(){
         return this.#name;
     }
 
-    set name(newName){
+    set setName(newName){
         if(typeof newName !== "string"){
             throw new Error("O nome precisa ser um texto.");
         }
@@ -33,11 +33,11 @@ export default class UserModel{
         this.#name = newName;
     }
 
-    get age(){
+    get getAge(){
         return this.#age;
     }
 
-    set age(newAge){
+    set setAge(newAge){
         if(typeof newAge !== "number"){
             throw new Error("Campo idade inválido");
         }
@@ -45,11 +45,11 @@ export default class UserModel{
         this.#age = newAge;
     }
 
-    get birthData(){
+    get getBirthData(){
         return this.#birthData;
     }
 
-    set birthData(newBirthData){
+    set setBirthData(newBirthData){
         const dateNow = new Date();
         const dateToCheck = new Date(newBirthData);
 
@@ -65,11 +65,11 @@ export default class UserModel{
         this.#birthData = newBirthData;
     }
 
-    get cpf(){
+    get getCpf(){
         return this.#cpf;
     }
 
-    set cpf(newCpf){
+    set setCpf(newCpf){
         if(!validate(newCpf)){
             throw new Error("CPF INVÁLIDO");
         }
@@ -77,11 +77,11 @@ export default class UserModel{
         this.#cpf = newCpf;
     }
 
-    get email(){
+    get getEmail(){
         return this.#email;
     }
 
-    set email(newEmail){
+    set setEmail(newEmail){
         if(!validator.isEmail(newEmail)){
             throw new Error("E-mail inválido");
         }
@@ -89,11 +89,11 @@ export default class UserModel{
         this.#email = newEmail;
     }
 
-    get password(){
+    get getPassword(){
         return this.#password;
     }
 
-    set password(newPassword){
+    set setPassword(newPassword){
         if(typeof newPassword !== "string"){
             throw new Error("Senha precisa ser uma string");
         }
