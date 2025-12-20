@@ -1,6 +1,6 @@
 class ProfilesModel{
     constructor(){
-        this.profiles = ["Admin", "Atendente", "Motorista", "Cliente"];
+        this.profiles = ["Admin", "Atendente", "Motorista"];
     }
 }
 
