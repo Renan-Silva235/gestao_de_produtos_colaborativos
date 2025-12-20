@@ -21,8 +21,10 @@ export default class RegisterUserModel{
                                               this.body.data.role);
 
 
-            employee.setPassword = this.#hashPassword(employee.getPassword);
-            await UserRepository.createEmployee(employee);
+
+        await this.#userAlreadyExist(this.body.data.cpf, "Employees");
+        employee.setPassword = this.#hashPassword(employee.getPassword);
+        await UserRepository.createEmployee(employee);
 
 
         } catch (error) {
@@ -45,6 +47,7 @@ export default class RegisterUserModel{
 
 
 
+            await this.#userAlreadyExist(this.body.data.cpf, "Customers");
             customer.setPassword = this.#hashPassword(customer.getPassword);
             await UserRepository.createCustomer(customer, id_responsible);
         } catch (error) {
@@ -60,11 +63,20 @@ export default class RegisterUserModel{
                                         this.body.data.cpf,
                                         this.body.data.email);
 
+            await this.#userAlreadyExist(this.body.data.cpf, "Donors");
             await UserRepository.createDonor(donor, id_responsible);
 
         } catch (error) {
             throw new Error(error.message)
         }
+    }
+
+    async #userAlreadyExist(dataUser, table){
+        if(await UserRepository.queryUser(dataUser, table)){
+            throw new Error("foi encontrado um usuário cadastrado com esse cpf");
+        }
+
+        return;
     }
 
 
