@@ -38,11 +38,11 @@ export default class UserModel{
     }
 
     set setAge(newAge){
-        if(typeof newAge !== "number"){
+        if(typeof newAge === ""){
             throw new Error("Campo idade inválido");
         }
 
-        this.#age = newAge;
+        this.#age = Number(newAge);
     }
 
     get getBirthData(){
@@ -50,19 +50,14 @@ export default class UserModel{
     }
 
     set setBirthData(newBirthData){
-        const dateNow = new Date();
-        const dateToCheck = new Date(newBirthData);
-
-        if(!/^\d{2}\/\d{2}\/\d{4}$/.test(newBirthData)){
+        if(!/^\d{4}-\d{2}-\d{2}$/.test(newBirthData)){
             throw new Error("campo Data de Nascimento inválido.");
-        }
-        else if(dateToCheck.getTime() >= dateNow.getTime()){
-            throw new Error("Data de Nascimento inválida.");
         }
 
         this.#convertDateAndValidate(newBirthData);
 
-        this.#birthData = newBirthData;
+        const [year, month, day] = newBirthData.split("-");
+        this.#birthData = `${day}/${month}/${year}`;
     }
 
     get getCpf(){
@@ -97,15 +92,19 @@ export default class UserModel{
         if(typeof newPassword !== "string"){
             throw new Error("Senha precisa ser uma string");
         }
-        else if(!/^\d{4}$/.test(newPassword)){
+
+        const isRawPassword = /^\d{4}$/.test(newPassword);
+        const isHash = newPassword.length === 60;
+
+        if(!isRawPassword && !isHash){
             throw new Error("Senha deve conter 4 dígitos numéricos")
         }
-
         this.#password = newPassword;
+
     }
 
     #convertDateAndValidate(date){
-        const [day, month, year] = date.split("/").map(Number);
+        const [year, month, day] = date.split("-").map(Number);
         const dateToCheck = new Date(year, month - 1, day);
         const dateNow = new Date();
 
