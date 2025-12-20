@@ -1,6 +1,6 @@
 import UserModel from "./UserModel.js";
 
-export class CustomerModel extends UserModel{
+export default class CustomerModel extends UserModel{
     #address;
     #city;
     #state;

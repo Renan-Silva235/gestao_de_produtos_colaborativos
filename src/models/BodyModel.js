@@ -1,19 +1,7 @@
 export default class BodyModel{
-    #data;
-    #csrf;
-
     constructor(body){
-        const {csrf, ...data} = body;
-        this.#data = data;
-        this.#csrf = csrf;
+        const {_csrf, ...data} = body;
+        this.data = data;
+        this._csrf = _csrf;
     }
-
-    get getCleanData(){
-        return this.#data;
-    }
-
-    get getCsrf(){
-        return this.#csrf;
-    }
-
 }
