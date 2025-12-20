@@ -2,22 +2,22 @@ import UserModel  from "./UserModel.js";
 import ProfileModel from "./ProfilesModel.js";
 
 export default class EmployeeModel extends UserModel{
-    #position;
+    #role;
 
-    constructor(name, age, birthData, cpf, email, password, position){
+    constructor(name, age, birthData, cpf, email, password, role){
         super(name, age, birthData, cpf, email, password);
-        this.setPosition = position;
+        this.setRole = role;
     }
 
-    get getPosition(){
-        return this.#position;
+    get getRole(){
+        return this.#role;
     }
 
-    set setPosition(newPosition){
-        if(!ProfileModel.profiles.includes(newPosition)){
+    set setRole(newRole){
+        if(!ProfileModel.profiles.includes(newRole)){
             throw new Error("cargo inválido.");
         }
 
-        this.#position = newPosition;
+        this.#role = newRole;
     }
 }
