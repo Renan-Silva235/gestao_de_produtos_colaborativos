@@ -14,10 +14,16 @@ class RegisterUserController{
             const register = new RegisterUserModel(request.body);
             await register.registerEmployee();
             request.flash("success", "Funcionário cadastrado com sucesso.");
-            return response.redirect("/register-employee");
+            request.session.save(() => {
+                response.redirect("/register-employee");
+            });
+            return;
         }catch(error){
             request.flash("errors", error.message);
-            return response.redirect("/register-employee");
+            request.session.save(() => {
+                response.redirect("/register-employee");
+            });
+            return;
         }
     }
 
@@ -31,11 +37,17 @@ class RegisterUserController{
             const register = new RegisterUserModel(request.body);
             await register.registerCustomer(request.session.user.id);
             request.flash("success", "Cliente cadastrado com sucesso");
-            return response.redirect("/register-customer");
+            request.session.save(() => {
+                response.redirect("/register-customer");
+            });
+            return;
 
         } catch (error) {
             request.flash("errors", error.message);
-            return response.redirect("/register-customer");
+            request.session.save(() => {
+                response.redirect("/register-customer");
+            });
+            return;
         }
     }
 
@@ -49,10 +61,16 @@ class RegisterUserController{
             const register = new RegisterUserModel(request.body);
             await register.registerDonor(request.session.user.id);
             request.flash("success", "Doador cadastrado com sucesso.");
-            return response.redirect("/register-donor");
+            request.session.save(() => {
+                response.redirect("/register-donor");
+            });
+            return;
         } catch (error) {
             request.flash("errors", error.message);
-            return response.redirect("/register-donor");
+            request.session.save(() => {
+                response.redirect("/register-donor");
+            });
+            return;
         }
     }
 

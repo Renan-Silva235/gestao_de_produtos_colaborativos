@@ -12,6 +12,7 @@ export default class CreateDatabase{
         this.#createTableEmployees();
         this.#createTableCustomer();
         this.#createTableDonor();
+        this.#createTableUsers();
     }
 
     #createTableEmployees(){
@@ -22,7 +23,6 @@ export default class CreateDatabase{
             DataDeNascimento TEXT NOT NULL,
             Cpf TEXT UNIQUE NOT NULL,
             Email TEXT UNIQUE NOT NULL,
-            Senha TEXT NOT NULL,
             Cargo TEXT NOT NULL
         );`;
         this.db.exec(commandSqlToCreateTable);
@@ -37,7 +37,6 @@ export default class CreateDatabase{
             DataDeNascimento TEXT NOT NULL,
             Cpf TEXT UNIQUE NOT NULL,
             Email TEXT UNIQUE NOT NULL,
-            Senha TEXT NOT NULL,
             Endereco TEXT NOT NULL,
             Cidade TEXT NOT NULL,
             Estado TEXT NOT NULL,
@@ -60,6 +59,17 @@ export default class CreateDatabase{
             FOREIGN KEY (id_responsavel) REFERENCES Employees(id)
         );`
 
+        this.db.exec(commandSqlToCreateTable);
+    }
+
+    #createTableUsers(){
+        const commandSqlToCreateTable = `
+            CREATE TABLE IF NOT EXISTS Users(
+                Email TEXT UNIQUE NOT NULL,
+                Senha TEXT NOT NULL,
+                Level TEXT NOT NULL
+            )
+        `
         this.db.exec(commandSqlToCreateTable);
     }
 

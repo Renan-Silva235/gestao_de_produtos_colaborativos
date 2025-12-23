@@ -6,7 +6,6 @@ export default class UserModel{
     #age;
     #birthData;
     #email;
-    #password;
     #cpf;
 
     constructor(name, age, birthData, cpf, email, password){
@@ -15,7 +14,6 @@ export default class UserModel{
         this.setBirthData = birthData;
         this.setCpf = cpf;
         this.setEmail = email;
-        this.setPassword = password;
     }
 
     get getName(){
@@ -84,24 +82,6 @@ export default class UserModel{
         this.#email = newEmail;
     }
 
-    get getPassword(){
-        return this.#password;
-    }
-
-    set setPassword(newPassword){
-        if(typeof newPassword !== "string"){
-            throw new Error("Senha precisa ser uma string");
-        }
-
-        const isRawPassword = /^\d{4}$/.test(newPassword);
-        const isHash = newPassword.length === 60;
-
-        if(!isRawPassword && !isHash){
-            throw new Error("Senha deve conter 4 dígitos numéricos")
-        }
-        this.#password = newPassword;
-
-    }
 
     #convertDateAndValidate(date){
         const [year, month, day] = date.split("-").map(Number);

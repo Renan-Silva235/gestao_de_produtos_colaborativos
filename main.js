@@ -1,3 +1,3 @@
-import ServerToTestsConfiguration from "./server/ServerToTests.js";
+import Server from "./server/Server.js"
 
-ServerToTestsConfiguration.runServer()
+Server.runServer()

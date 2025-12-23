@@ -1,2 +1,8 @@
 /node_modules
 .env
+to_do.txt
+/src_test
+test.js
+/database/Database_test.db
+/database/Database.db
+/src/views
